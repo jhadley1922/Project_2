@@ -59,5 +59,47 @@ namespace Project_2.Controllers
 
             return View(apps);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int appid)
+        {
+            var app = appContext.Appointments.Single(x => x.AppointmentId == appid);
+
+            return View("NewAppointment", app);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Appointment app)
+        {
+            if (ModelState.IsValid)
+            {
+                appContext.Update(app);
+                appContext.SaveChanges();
+
+                return View("Index");
+            }
+            else // if invalid
+            {
+                return View("NewAppointment", app);
+            }
+
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int appid)
+        {
+            var app = appContext.Appointments.Single(x => x.AppointmentId == appid);
+
+            return View(app);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Appointment app)
+        {
+            appContext.Appointments.Remove(app);
+            appContext.SaveChanges();
+
+            return View("Index");
+        }
     }
 }

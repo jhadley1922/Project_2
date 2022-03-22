@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Delete Appointment";
+}
+
+@model Appointment
+
+<div class="text-center">
+    <h1 class="display-4">Are you sure you want to delete "@Model.GroupName"?</h1>
+</div>
+
+<form method="post" asp-controller="Home" asp-action="Delete">
+    <a asp-controller="Home" asp-action="Collection" class="btn btn-primary">Cancel</a>
+    <button type="submit">Delete</button>
+
+    <input type="hidden" asp-for="AppointmentId" />
+</form>
