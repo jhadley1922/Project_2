@@ -11,11 +11,11 @@ namespace Project_2.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private AppointmentContext appContext { get; set; }
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(AppointmentContext name)
         {
-            _logger = logger;
+            appContext = name;
         }
 
         public IActionResult Index()
@@ -28,9 +28,26 @@ namespace Project_2.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult NewAppointment()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult NewAppointment(Appointment app)
+        {
+            if (ModelState.IsValid)
+            {
+                appContext.Add(app);
+                appContext.SaveChanges();
+
+                return View("Index");
+            }
+            else // if invalid
+            {
+                return View(app);
+            }
         }
 
         public IActionResult Appointments()
