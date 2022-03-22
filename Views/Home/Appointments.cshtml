@@ -2,6 +2,42 @@
     ViewData["Title"] = "Appointments";
 }
 
-<div class="text-center">
+@*<div class="text-center">
     <h1 class="display-4">Hey</h1>
-</div>
+</div>*@
+
+@model List<Appointment>
+
+<table class="table table-bordered table-striped table-hover">
+
+    <thead class="font-weight-bold">
+        <tr>
+            <td>Date</td>
+            <td>Time</td>
+            <td>Group Name</td>
+            <td>Group Size</td>
+            <td>Email</td>
+            <td>Phone Number</td>
+        
+        </tr>
+    </thead>
+
+    <tbody>
+        <!--Loop through appointments in database to fill table-->
+        @foreach (var item in Model) // UpperCase Model uses the type
+        {
+            <tr>
+                <td>@item.Date</td>
+                <td>@item.Time</td>
+                <td>@item.GroupName</td>
+                <td>@item.SizeOfGroup</td>
+                <td>@item.Email</td>
+                <td>@item.Phone</td>
+
+                <td><a asp-controller="Home" asp-action="Edit" asp-route-appointmentid="@item.AppointmentId">Edit</a></td>
+                <td><a asp-controller="Home" asp-action="Delete" asp-route-appointmentid="@item.AppointmentId">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+
+</table>
