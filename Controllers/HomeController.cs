@@ -50,9 +50,14 @@ namespace Project_2.Controllers
             }
         }
 
+        [HttpGet]
         public IActionResult Appointments()
         {
-            return View();
+            var apps = appContext.Appointments
+                .OrderBy(x => x.GroupName)
+                .ToList();
+
+            return View(apps);
         }
     }
 }
