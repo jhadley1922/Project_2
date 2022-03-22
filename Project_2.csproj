@@ -16,4 +16,7 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="Views\Home\Form.cshtml" />
+  </ItemGroup>
 </Project>
