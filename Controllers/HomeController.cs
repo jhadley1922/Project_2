@@ -11,11 +11,11 @@ namespace Project_2.Controllers
 {
     public class HomeController : Controller
     {
-        private AppointmentContext appContext { get; set; }
+        private IAppointmentRepository repo;
 
-        public HomeController(AppointmentContext name)
+        public HomeController(IAppointmentRepository temp)
         {
-            appContext = name;
+            repo = temp;
         }
 
         public IActionResult Index()
@@ -39,8 +39,7 @@ namespace Project_2.Controllers
         {
             if (ModelState.IsValid)
             {
-                appContext.Add(app);
-                appContext.SaveChanges();
+                repo.CreateAppointment(app);
 
                 return View("Index");
             }
@@ -53,7 +52,7 @@ namespace Project_2.Controllers
         [HttpGet]
         public IActionResult Appointments()
         {
-            var apps = appContext.Appointments
+            var apps = repo.Appointments
                 .OrderBy(x => x.GroupName)
                 .ToList();
 
@@ -63,7 +62,7 @@ namespace Project_2.Controllers
         [HttpGet]
         public IActionResult Edit(int appid)
         {
-            var app = appContext.Appointments.Single(x => x.AppointmentId == appid);
+            var app = repo.Appointments.Single(x => x.AppointmentId == appid);
 
             return View("NewAppointment", app);
         }
@@ -73,8 +72,7 @@ namespace Project_2.Controllers
         {
             if (ModelState.IsValid)
             {
-                appContext.Update(app);
-                appContext.SaveChanges();
+                repo.SaveAppointment(app);
 
                 return View("Index");
             }
@@ -88,7 +86,7 @@ namespace Project_2.Controllers
         [HttpGet]
         public IActionResult Delete(int appid)
         {
-            var app = appContext.Appointments.Single(x => x.AppointmentId == appid);
+            var app = repo.Appointments.Single(x => x.AppointmentId == appid);
 
             return View(app);
         }
@@ -96,8 +94,7 @@ namespace Project_2.Controllers
         [HttpPost]
         public IActionResult Delete(Appointment app)
         {
-            appContext.Appointments.Remove(app);
-            appContext.SaveChanges();
+            repo.DeleteAppointment(app);
 
             return View("Index");
         }
