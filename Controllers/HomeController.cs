@@ -29,7 +29,6 @@ namespace Project_2.Controllers
             // I need the timeslots to be sent here so I can check if they're taken or not to display them.
             // Also, would this also need a post method to send the time selected to the New Appointment page, to be an undeditable part of the form?
             // Not trying to do your job, just walking through it for myself
-            ViewBag.FirstDay = new DateTime(2022, 3, 20);
 
             var times = repo.Timeslots
                 .OrderBy(x => x.TimeslotId)
@@ -39,19 +38,19 @@ namespace Project_2.Controllers
         }
 
         [HttpPost]
-        public IActionResult SignUp(DateTime dateTime, int time)
+        public IActionResult SignUp(DateTime date, int timeInt)
         {
-            DateTime appointmentTime = dateTime.AddHours(time);/*new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, time, 0, 0);*/
-
-            Timeslot chosenTime = repo.Timeslots.FirstOrDefault(x => x.TimeslotId == 4);
-
-            return RedirectToAction("NewAppointment", chosenTime);
+            DateTime chosenDate = new DateTime(date.Day, date.Month, date.Day, timeInt, 0, 0);
+            //int timeId = repo.Timeslots.FirstOrDefault(x => x.DateTime.ToString() == chosenDate.ToString()).TimeslotId;
+            int timeId = repo.Timeslots.FirstOrDefault(x => (x.DateTime.ToString()) == (chosenDate.ToString())).TimeslotId;
+            return RedirectToAction("NewAppointment", timeId);
         }
 
         [HttpGet]
-        public IActionResult NewAppointment(Timeslot chosenTime)
+        public IActionResult NewAppointment(int timeId)
         {
 
+            Timeslot chosenTime = repo.Timeslots.FirstOrDefault(x => x.TimeslotId == timeId);
             ViewBag.AppointmentTime = chosenTime;
 
             return View();
