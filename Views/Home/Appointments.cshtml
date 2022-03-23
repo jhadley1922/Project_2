@@ -8,8 +8,8 @@
 
     <thead class="font-weight-bold">
         <tr>
-            <td>Date/Time</td>
-            @*<td>Time</td>*@
+            <td>Date</td>
+            <td>Time</td>
             <td>Group Name</td>
             <td>Group Size</td>
             <td>Email</td>
@@ -23,7 +23,8 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Timeslot.DateTime</td>
+                <td>@item.Timeslot.DateTime.ToShortDateString()</td>
+                <td>@item.Timeslot.DateTime.ToShortTimeString()</td>
                 @*<td>@item.Time</td>*@
                 <td>@item.GroupName</td>
                 <td>@item.SizeOfGroup</td>

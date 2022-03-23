@@ -23,12 +23,25 @@ namespace Project_2.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult SignUp()
         {
             // I need the timeslots to be sent here so I can check if they're taken or not to display them.
             // Also, would this also need a post method to send the time selected to the New Appointment page, to be an undeditable part of the form?
             // Not trying to do your job, just walking through it for myself
+            ViewBag.FirstDay = new DateTime(2022, 3, 20);
+            //var times = repo.Timeslots.OrderBy()
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult SignUp(DateTime dateTime, int time)
+        {
+            DateTime appointmentTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, time, 0, 0);
+
+            ViewBag.AppointmentTime = appointmentTime;
+            
+            return RedirectToAction("NewAppointment");
         }
 
         [HttpGet]

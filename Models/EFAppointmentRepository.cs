@@ -14,6 +14,7 @@ namespace Project_2.Models
             context = c;
         }
         public IQueryable<Appointment> Appointments => context.Appointments;
+        public IQueryable<Timeslot> Timeslots => context.Timeslots;
 
         public void CreateAppointment(Appointment a)
         {
