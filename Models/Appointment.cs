@@ -20,10 +20,8 @@ namespace Project_2.Models
         public int SizeOfGroup { get; set; }
 
         [Required]
-        public string Date { get; set; }
-
-        [Required]
-        public string Time { get; set; }
+        public int TimeslotId { get; set; }
+        public Timeslot Timeslot { get; set; }
 
         [Required]
         [EmailAddress]
