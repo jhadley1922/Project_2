@@ -1,4 +1,4 @@
-﻿<!--Form to create/edit an appointmnet-->
+﻿<!--Form to create/edit an appointment-->
 @{
     ViewData["Title"] = "Create an Appointment";
     Timeslot chosenTime = ViewBag.AppointmentTime;
@@ -8,7 +8,7 @@
 
 <!--Form for User to fill out-->
 <div>
-    <form method="post">
+    <form method="post" style="text-align:center">
 
         <div asp-validation-summary="All"></div>
 
@@ -45,7 +45,7 @@
 
         <input type="hidden" asp-for="AppointmentId" />
 
-        <button type="submit">Submit Appointment</button>
+        <button type="submit" class="btn btn-info">Schedule Appointment</button>
     </form>
 
 </div>
