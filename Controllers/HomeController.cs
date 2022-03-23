@@ -30,8 +30,12 @@ namespace Project_2.Controllers
             // Also, would this also need a post method to send the time selected to the New Appointment page, to be an undeditable part of the form?
             // Not trying to do your job, just walking through it for myself
             ViewBag.FirstDay = new DateTime(2022, 3, 20);
-            //var times = repo.Timeslots.OrderBy()
-            return View();
+
+            var times = repo.Timeslots
+                .OrderBy(x => x.TimeslotId)
+                .ToList();
+
+            return View(times);
         }
 
         [HttpPost]
@@ -39,7 +43,7 @@ namespace Project_2.Controllers
         {
             DateTime appointmentTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, time, 0, 0);
 
-            ViewBag.AppointmentTime = appointmentTime;
+            
             
             return RedirectToAction("NewAppointment");
         }
