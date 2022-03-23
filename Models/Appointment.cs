@@ -12,10 +12,10 @@ namespace Project_2.Models
         [Required]
         public long AppointmentId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a group name.")]
         public string GroupName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a number between 1 & 15.")]
         [Range(1, 15)]
         public int SizeOfGroup { get; set; }
 
@@ -23,7 +23,7 @@ namespace Project_2.Models
         public int TimeslotId { get; set; }
         public Timeslot Timeslot { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter a valid email address.")]
         [EmailAddress]
         public string Email { get; set; }
 

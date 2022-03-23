@@ -1,4 +1,5 @@
-﻿@{
+﻿<!--Form to create/edit an appointmnet-->
+@{
     ViewData["Title"] = "Create an Appointment";
     Timeslot chosenTime = ViewBag.AppointmentTime;
 }
@@ -8,10 +9,11 @@
 <!--Form for User to fill out-->
 <div>
     <form method="post">
+
         <div asp-validation-summary="All"></div>
+
         @*My idea: this page receives a timestamp from the "signup" page, keeps it as a hidden attribute, sends it for the TimeSlot page*@
         <input type="hidden" asp-for="Timeslot" value="@chosenTime.TimeslotId" />
-
         <label for="Date">Date:</label>
         <input disabled value="@chosenTime.DateTime.ToShortDateString()" />
         <br />
