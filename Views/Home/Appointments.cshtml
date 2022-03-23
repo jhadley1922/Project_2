@@ -27,8 +27,8 @@
         @foreach (var item in Model) // UpperCase Model uses the type
         {
             <tr>
-                <td>@item.Date</td>
-                <td>@item.Time</td>
+                <td>@item.Timeslot.DateTime.Date</td>
+                <td>@item.Timeslot.DateTime.TimeOfDay</td>
                 <td>@item.GroupName</td>
                 <td>@item.SizeOfGroup</td>
                 <td>@item.Email</td>

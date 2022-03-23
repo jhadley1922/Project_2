@@ -25,6 +25,9 @@ namespace Project_2.Controllers
 
         public IActionResult SignUp()
         {
+            // I need the timeslots to be sent here so I can check if they're taken or not to display them.
+            // Also, would this also need a post method to send the time selected to the New Appointment page, to be an undeditable part of the form?
+            // Not trying to do your job, just walking through it for myself
             return View();
         }
 

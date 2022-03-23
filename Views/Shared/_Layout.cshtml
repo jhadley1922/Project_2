@@ -33,14 +33,22 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3" style="background-color: #fcfcfc;">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted text-center">
         <div class="container">
-            &copy; 2022 - Project_2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row">
+                <div class="col col-2"></div>
+                <div class="col col-2">&copy; 2022</div>
+                <div class="col col-1"></div>
+                <div class="col col-2">IS 413 Project 2</div>
+                <div class="col col-1"></div>
+                <div class="col col-2">IS 3-15</div>
+                <div class="col col-2"></div>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
