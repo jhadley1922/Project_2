@@ -30,7 +30,7 @@ namespace Project_2.Models
 
         public void SaveAppointment(Appointment a)
         {
-            //context.Update(a);
+            context.Update(a);
             context.SaveChanges();
         }
     }
