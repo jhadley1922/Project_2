@@ -41,16 +41,19 @@ namespace Project_2.Controllers
         [HttpPost]
         public IActionResult SignUp(DateTime dateTime, int time)
         {
-            DateTime appointmentTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, time, 0, 0);
+            DateTime appointmentTime = dateTime.AddHours(time);/*new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, time, 0, 0);*/
 
-            
-            
-            return RedirectToAction("NewAppointment");
+            Timeslot chosenTime = repo.Timeslots.FirstOrDefault(x => x.TimeslotId == 4);
+
+            return RedirectToAction("NewAppointment", chosenTime);
         }
 
         [HttpGet]
-        public IActionResult NewAppointment()
+        public IActionResult NewAppointment(Timeslot chosenTime)
         {
+
+            ViewBag.AppointmentTime = chosenTime;
+
             return View();
         }
 
