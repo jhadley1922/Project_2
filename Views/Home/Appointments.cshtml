@@ -2,18 +2,14 @@
     ViewData["Title"] = "Appointments";
 }
 
-@*<div class="text-center">
-    <h1 class="display-4">Hey</h1>
-</div>*@
-
 @model List<Appointment>
 
 <table class="table table-bordered table-striped table-hover">
 
     <thead class="font-weight-bold">
         <tr>
-            <td>Date</td>
-            <td>Time</td>
+            <td>Date/Time</td>
+            @*<td>Time</td>*@
             <td>Group Name</td>
             <td>Group Size</td>
             <td>Email</td>
@@ -24,11 +20,11 @@
 
     <tbody>
         <!--Loop through appointments in database to fill table-->
-        @foreach (var item in Model) // UpperCase Model uses the type
+        @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Timeslot.DateTime.Date</td>
-                <td>@item.Timeslot.DateTime.TimeOfDay</td>
+                <td>@item.Timeslot.DateTime</td>
+                @*<td>@item.Time</td>*@
                 <td>@item.GroupName</td>
                 <td>@item.SizeOfGroup</td>
                 <td>@item.Email</td>

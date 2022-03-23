@@ -10,7 +10,7 @@
     <form method="post">
         <div asp-validation-summary="All"></div>
         @*My idea: this page receives a timestamp from the "signup" page, keeps it as a hidden attribute, sends it for the TimeSlot page*@
-        <label asp-for="Timeslot">Date:</label>
+        <label asp-for="Timeslot">Date/Time:</label>
         <input asp-for="Timeslot" type="datetime-local" />
         <br />
 
