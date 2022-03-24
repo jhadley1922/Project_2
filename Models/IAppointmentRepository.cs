@@ -13,5 +13,6 @@ namespace Project_2.Models
         public void SaveAppointment(Appointment a);
         public void CreateAppointment(Appointment a);
         public void DeleteAppointment(Appointment a);
+        public void SaveTimeslot(Timeslot t);
     }
 }

@@ -33,5 +33,11 @@ namespace Project_2.Models
             context.Update(a);
             context.SaveChanges();
         }
+
+        public void SaveTimeslot(Timeslot t)
+        {
+            context.Update(t);
+            context.SaveChanges();
+        }
     }
 }

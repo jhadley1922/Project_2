@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Project_2.Models;
 using System;
@@ -17,6 +18,14 @@ namespace Project_2.Controllers
         {
             repo = temp;
         }
+
+        //private AppointmentContext apptContext { get; set; }
+
+        //public HomeController(AppointmentContext context)
+        //{
+        //    apptContext = context;
+
+        //}
 
         public IActionResult Index()
         {
@@ -59,15 +68,21 @@ namespace Project_2.Controllers
 
             ViewBag.AppointmentTime = repo.Timeslots.Single(x => x.TimeslotId == timeId);
 
-            return View();
+            return View(new Appointment());
         }
 
         [HttpPost]
         public IActionResult NewAppointment(Appointment app)
         {
+            //app.Timeslot = repo.Timeslots.FirstOrDefault(x => x.TimeslotId == app.TimeslotId);
             if (ModelState.IsValid)
             {
+                Timeslot time = repo.Timeslots.FirstOrDefault(x => x.TimeslotId == app.TimeslotId);
+                time.Available = false;
+
                 repo.CreateAppointment(app);
+                
+                repo.SaveTimeslot(time);
 
                 return View("Index");
             }
@@ -82,7 +97,8 @@ namespace Project_2.Controllers
         public IActionResult Appointments()
         {
             var apps = repo.Appointments
-                .OrderBy(x => x.GroupName)
+                .Include(x => x.Timeslot)
+                .OrderBy(x => x.TimeslotId)
                 .ToList();
 
             return View(apps);
@@ -92,6 +108,7 @@ namespace Project_2.Controllers
         public IActionResult Edit(int appid)
         {
             var app = repo.Appointments.Single(x => x.AppointmentId == appid);
+            ViewBag.AppointmentTime = repo.Timeslots.Single(x => x.TimeslotId == app.TimeslotId);
 
             return View("NewAppointment", app);
         }
@@ -103,10 +120,11 @@ namespace Project_2.Controllers
             {
                 repo.SaveAppointment(app);
 
-                return View("Index");
+                return RedirectToAction("Appointments");
             }
             else // if invalid
             {
+                ViewBag.AppointmentTime = repo.Timeslots.Single(x => x.TimeslotId == app.TimeslotId);
                 return View("NewAppointment", app);
             }
 
@@ -123,7 +141,13 @@ namespace Project_2.Controllers
         [HttpPost]
         public IActionResult Delete(Appointment app)
         {
+            //Appointment app = repo.Appointments.FirstOrDefault(x => x.AppointmentId == appId);
+            Timeslot time = repo.Timeslots.FirstOrDefault(x => x.TimeslotId == app.TimeslotId);
+            time.Available = true;
+
             repo.DeleteAppointment(app);
+            
+            repo.SaveTimeslot(time);
 
             return View("Index");
         }

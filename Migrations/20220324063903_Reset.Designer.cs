@@ -9,8 +9,8 @@ using Project_2.Models;
 namespace Project_2.Migrations
 {
     [DbContext(typeof(AppointmentContext))]
-    [Migration("20220323000228_Second")]
-    partial class Second
+    [Migration("20220324063903_Reset")]
+    partial class Reset
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

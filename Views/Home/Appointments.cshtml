@@ -34,8 +34,8 @@
                 <td>@item.Phone</td>
 
                 <!--buttons for user to edit/delet an appointment-->
-                <td><a asp-controller="Home" asp-action="Edit" asp-route-appid="@item.AppointmentId">Edit</a></td>
-                <td><a asp-controller="Home" asp-action="Delete" asp-route-appid="@item.AppointmentId">Delete</a></td>
+                <td><a class = "btn btn-outline-info" asp-controller="Home" asp-action="Edit" asp-route-appid="@item.AppointmentId">Edit</a></td>
+                <td><a class="btn btn-outline-danger" asp-controller="Home" asp-action="Delete" asp-route-appid="@item.AppointmentId">Delete</a></td>
             </tr>
         }
     </tbody>
