@@ -73,7 +73,7 @@ namespace Project_2.Controllers
             }
             else // if invalid
             {
-                // ViewBag.AppointmentTime = repo.Timeslots.Single(x => x.TimeslotId == app.TimeslotId);
+                ViewBag.AppointmentTime = repo.Timeslots.Single(x => x.TimeslotId == app.TimeslotId);
                 return View(app);
             }
         }

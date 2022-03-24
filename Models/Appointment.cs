@@ -19,7 +19,7 @@ namespace Project_2.Models
         [Range(1, 15)]
         public int SizeOfGroup { get; set; }
 
-        [Required(ErrorMessage = "The date or time is invalid.")]
+        [Required]
         public int TimeslotId { get; set; }
         public Timeslot Timeslot { get; set; }
 
