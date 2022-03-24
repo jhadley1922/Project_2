@@ -1,52 +1,154 @@
 ﻿@{
     ViewData["Title"] = "Sign Up";
-    DateTime firstDay = ViewBag.FirstDay;
+    DateTime currentDay = ViewBag.FirstDay.Date;
 }
 
-@model List<Timeslot>
+@model List<Timeslot> 
 
-<div class="text-center">
+<div class="text-center container-fluid">
     <h4 class="display-4">Select an available date and time for your tour</h4>
     <br />
     <div class="row">
         <div class="col col-2"></div>
-        @for (int day = 0; day < 7; day++)
+            @for (int i = 0; i < Model.Count; i += 13)
+            {
+    <div class="col col-1 text-center">
+        <p>@Model[i].DateTime.Date.ToShortDateString()</p>
+        @foreach (Timeslot timestamp in Model)
         {
-        
-            <div class="col col-1">
-                <p>@firstDay.AddDays(day).ToShortDateString()</p>
+            if (timestamp.DateTime.Date > currentDay.Date)
+            {
+                currentDay = timestamp.DateTime.Date;
+                break;
 
-                @for (int i = 8; i < 21; i++)
+            }
+            else if (timestamp.DateTime.Date < currentDay.Date)
+            {
+
+            }
+            else
+            {
+                if (timestamp.Available == false)
                 {
-                    //if (true)
-                    //{
-                    //    string availableStyle = "primary";
-                    //    bool availableInput = false;
-                    //}
-                    //else
-                    //{
-                    //    string availableStyle = "secondary";
-                    //    bool availableInput = true;
-                    //}
-
-                    @if (i <= 12)
-                    {
-                        <form method="post" asp-controller="Home" asp-action="SignUp">
-                            <input type="hidden" value="@(firstDay.AddDays(day))" id="date" />
-                            <button type="submit" class="btn btn-primary w-100 m-2">@i:00 am</button>
-                            <input type="hidden" value="@i" id="timeInt" />
-                        </form>
-                    }
-                    else
-                    {
-                    <form method="post" asp-controller="Home" asp-action="SignUp">
-                        <input type="hidden" value="@(firstDay.AddDays(day))" id="date" />
-                        <button class="btn btn-primary w-100 m-2">@(i-12):00 pm</button>
-                        <input type="hidden" value="@i" id="timeInt" />
-                    </form>
-                    }
+                    <span class="btn btn-secondary">@timestamp.DateTime.ToShortTimeString()</span>
                 }
-            </div>
+                else
+                {
+                    <a class="btn btn-primary m-1 w-100" asp-route-timeId="@timestamp.TimeslotId" asp-area="" asp-controller="Home" asp-action="NewAppointment">@timestamp.DateTime.ToShortTimeString()</a>
+                }
+                @*<form method="post" asp-controller="Home" asp-action="SignUp">
+                <input type="hidden" value="@timestamp.TimeslotId" name="timeId"/>*@
+
+                @*<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>*@
+                @*</form>*@
+            }
+
+
         }
     </div>
-</div>
+            }
+        </div>
+
+    </div>
+
+
+
+        @*<div class="text-center">
+                <h4 class="display-4">Select an available date and time for your tour</h4>
+                <br />
+                <div class="row">
+                    <div class="col col-2"></div>
+                    @for (int day = 0; day < 7; day++)
+                    {
+
+                        <div class="col col-1">
+                            <p>@firstDay.AddDays(day).ToShortDateString()</p>
+
+                            @for (int i = 8; i < 21; i++)
+                            {
+                                //if (true)
+                                //{
+                                //    string availableStyle = "primary";
+                                //    bool availableInput = false;
+                                //}
+                                //else
+                                //{
+                                //    string availableStyle = "secondary";
+                                //    bool availableInput = true;
+                                //}
+
+                                @if (i <= 12)
+                                {
+                                    <form method="post" asp-controller="Home" asp-action="SignUp">
+                                        <input type="hidden" value="@(firstDay.AddDays(day))" id="date" />
+                                        <button type="submit" class="btn btn-primary w-100 m-2">@i:00 am</button>
+                                        <input type="hidden" value="@i" id="timeInt" />
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form method="post" asp-controller="Home" asp-action="SignUp">
+                                        <input type="hidden" value="@(firstDay.AddDays(day))" id="date" />
+                                        <button class="btn btn-primary w-100 m-2">@(i-12):00 pm</button>
+                                        <input type="hidden" value="@i" id="timeInt" />
+                                    </form>
+                                }
+                            }
+                        </div>
+                    }
+                </div>
+            </div>*@
+
+
+        @*<div class="text-center">
+                <h4 class="display-4">Select an available date and time for your tour</h4>
+                <br />
+                <table>
+                            @foreach (var timestamp in Model)
+                            {
+                    <tr>
+                        @if (timestamp.DateTime.Date.ToShortDateString() == timestamp.DateTime.AddHours(15).Date.ToShortDateString())
+                        {
+                            <th>@timestamp.DateTime.ToShortDateString()</th>
+                        }-->
+                        <form method="post" asp-controller="Home" asp-action="SignUp">
+                <input type="hidden" value="apptDate.TimeslotId" />
+                <button class="btn btn-primary" type="submit">@timestamp.DateTime.ToShortTimeString()</button>
+                <br />
+            </form>
+            <!--<td>@timestamp.DateTime.ToShortTimeString()</td>
+                    </tr>
+                            }
+
+                </table>
+            </div>
+
+            <div class="text-center">
+                    <h4 class="display-4">Select an available date and time for your tour</h4>
+                    <br />
+                    <div class="row">
+                        <div class="col col-2"></div>
+
+                            @foreach (var timestamp in Model)
+                            {
+                                @if (timestamp.DateTime.Date.ToShortDateString() == timestamp.DateTime.AddHours(15).Date.ToShortDateString())
+                                {
+                                    <div class="col col-1">
+                                        <p>@timestamp.DateTime.ToShortDateString()</p>
+                                    </div>
+                                }
+                            }
+                        <div class="col col-3"></div>
+                    </div>
+                    <div>
+                        @foreach (var timestamp in Model)
+                        {
+                            <form method="post" asp-controller="Home" asp-action="SignUp">
+                                <input type="hidden" value="apptDate.TimeslotId" />
+                                <button class="btn btn-primary" type="submit">@timestamp.DateTime.ToShortTimeString()</button>
+                                <br />
+                            </form>
+
+                        }
+                    </div>
+                </div>*@

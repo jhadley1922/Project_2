@@ -8,23 +8,20 @@
 
 <!--Form for User to fill out-->
 <div>
-    <form method="post" style="text-align:center">
+    <form method="post" style="text-align:center;">
 
         <div asp-validation-summary="All"></div>
 
-        @*My idea: this page receives a timestamp from the "signup" page, keeps it as a hidden attribute, sends it for the TimeSlot page*@
-        <input type="hidden" asp-for="Timeslot" value="@chosenTime.TimeslotId" />
+        @*<input type="hidden" asp-for="Timeslot" value="@chosenTime" />*@
+        <input type="hidden" asp-for="TimeslotId" value="@chosenTime.TimeslotId" />
+
         <label for="Date">Date:</label>
-        <input disabled value="@chosenTime.DateTime.ToShortDateString()" />
+        <input disabled value="@chosenTime.DateTime.ToShortDateString()" id="date"/>
         <br />
 
         <label for="Time">Time:</label>
-        <input disabled value="@chosenTime.DateTime.ToShortTimeString()" />
+        <input disabled value="@chosenTime.DateTime.ToShortTimeString()" id="time"/>
         <br />
-
-        @*<label asp-for="Time">Time:</label>
-        <input asp-for="Time" />
-        <br />*@
 
         <label asp-for="GroupName">Group Name:</label>
         <input asp-for="GroupName" />

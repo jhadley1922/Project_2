@@ -38,21 +38,26 @@ namespace Project_2.Controllers
             return View(times);
         }
 
-        [HttpPost]
-        public IActionResult SignUp(DateTime dateTime, int time)
-        {
-            DateTime appointmentTime = dateTime.AddHours(time);/*new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, time, 0, 0);*/
+        //[HttpPost]
+        //public IActionResult SignUp(int timeId)
+        //{
+        //    //DateTime appointmentTime = dateTime.AddHours(time);/*new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, time, 0, 0);*/
 
-            Timeslot chosenTime = repo.Timeslots.FirstOrDefault(x => x.TimeslotId == 4);
 
-            return RedirectToAction("NewAppointment", chosenTime);
-        }
+        //    //Timeslot timeId = repo.Timeslots.FirstOrDefault(x => x.TimeslotId == 4);
+
+        //    Timeslot chosenTime = repo.Timeslots.Single(x => x.TimeslotId == timeId);
+        //    ViewBag.AppointmentTime = chosenTime;
+
+        //    return RedirectToAction("NewAppointment");
+        //}
 
         [HttpGet]
-        public IActionResult NewAppointment(Timeslot chosenTime)
+        public IActionResult NewAppointment(int timeId)
         {
+            //var chosenTime = repo.Timeslots.Single(x => x.TimeslotId == timeId);
 
-            ViewBag.AppointmentTime = chosenTime;
+            ViewBag.AppointmentTime = repo.Timeslots.Single(x => x.TimeslotId == timeId);
 
             return View();
         }
@@ -68,6 +73,7 @@ namespace Project_2.Controllers
             }
             else // if invalid
             {
+                // ViewBag.AppointmentTime = repo.Timeslots.Single(x => x.TimeslotId == app.TimeslotId);
                 return View(app);
             }
         }

@@ -57,6 +57,7 @@ namespace Project_2
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("NewAppointment", "/NewAppointment/{timeId}", new { Controller = "Home", action = "NewAppointment" });
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
