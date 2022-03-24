@@ -2,15 +2,24 @@
     ViewData["Title"] = "Delete Appointment";
 }
 
-@model Appointment;
+@model Appointment
 
 <div class="text-center">
     <h2 class="display-4">Are you sure you want to delete the appointment for @Model.GroupName?</h2>
 </div>
+<div class="row">
+    <div class="col col-4"></div>
+    <div class="col col-2">
+        <a asp-controller="Home" asp-action="Appointments" class="btn btn-primary p-1" style="width:100%;">Cancel</a>
+    </div>
+    <div class="col col-2">
+        <form method="post" asp-controller="Home" asp-action="Delete">
 
-<form method="post" asp-controller="Home" asp-action="Delete">
-    <a asp-controller="Home" asp-action="Appointments" class="btn btn-primary">Cancel</a>
-    <button type="submit" class="btn btn-primary">Delete</button>
 
-    <input type="hidden" asp-for="AppointmentId" />
-</form>
+            <button type="submit" class="btn btn-dark p-1" style="width:100%;">Delete</button>
+
+            <input type="hidden" asp-for="AppointmentId" />
+        </form>
+    </div>
+    <div class="col col-4"></div>
+</div>

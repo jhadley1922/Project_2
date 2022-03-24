@@ -141,11 +141,11 @@ namespace Project_2.Controllers
         [HttpPost]
         public IActionResult Delete(Appointment app)
         {
-            //Appointment app = repo.Appointments.FirstOrDefault(x => x.AppointmentId == appId);
-            Timeslot time = repo.Timeslots.FirstOrDefault(x => x.TimeslotId == app.TimeslotId);
+            Appointment appChange = repo.Appointments.Single(x => x.AppointmentId == app.AppointmentId);
+            Timeslot time = repo.Timeslots.FirstOrDefault(x => x.TimeslotId == appChange.TimeslotId);
             time.Available = true;
 
-            repo.DeleteAppointment(app);
+            repo.DeleteAppointment(appChange);
             
             repo.SaveTimeslot(time);
 
